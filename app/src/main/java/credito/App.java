@@ -6,22 +6,23 @@ package credito;
 import credito.model.CartaoCredito;
 import credito.model.Compra;
 
+import java.util.Collections;
 import java.util.Scanner;
 
 public class App {
 
     public static void main(String[] args) {
         var console = new Scanner(System.in);
-        var continueInput = true;
+        var runCompras = 1;
 
         System.out.print("Digite o limite do cartão: ");
         var input = console.nextDouble();
         var cartao = new CartaoCredito(input);
 
-        while (continueInput) {
-            System.out.print("Digite a descrição da compra:");
+        while (runCompras != 0) {
+            System.out.print("Digite a descrição da compra: ");
             var compraDescricao = console.next();
-            System.out.print("Digite o valor da compra:");
+            System.out.print("Digite o valor da compra:  ");
             var compraValor = console.nextDouble();
             var compra = new Compra(compraDescricao, compraValor);
             try {
@@ -34,10 +35,10 @@ public class App {
                 e.printStackTrace();
             }
             System.out.println("Deseja inserir outra compra? (1 -> sim, 0 -> não)");
-            var choice = console.nextInt();
-            continueInput = !(choice == 0);
+            runCompras = console.nextInt();
         }
 
+        Collections.sort(cartao.getCompras());
         System.out.println("COMPRAS REALIZADAS:");
         cartao.getCompras().forEach(System.out::println);
     }

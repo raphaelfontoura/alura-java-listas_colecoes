@@ -1,6 +1,6 @@
 package credito.model;
 
-public class Compra {
+public class Compra implements Comparable<Compra>{
     private String descricao;
     private double valor;
 
@@ -23,5 +23,10 @@ public class Compra {
                 "descricao='" + descricao + '\'' +
                 ", valor=" + valor +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Compra other) {
+        return Double.compare(this.valor, other.valor);
     }
 }
